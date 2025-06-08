@@ -1,0 +1,85 @@
+import datetime
+class UkrainianCalendar:
+    def get_holiday_list(self):
+        return [
+            "2025-01-01",   
+            "2025-03-08",  
+            "2025-04-20",  
+            "2025-05-09", 
+            "2025-08-24", 
+        ]
+    def is_working_day(self, date):
+        holidays = self.get_holiday_list()
+        weekday = date.weekday()  
+        return weekday < 5 and date.strftime("%Y-%m-%d") not in holidays
+    
+
+
+class Calculator:
+    def add(self, a, b):
+        return a + b
+    def subtract(self, a, b):
+        return a - b
+    def multiply(self, a, b):
+        return a * b
+    def divide(self, a, b):
+        if b != 0:
+            return a / b
+        return "На нуль не ділиться"
+    
+
+
+from collections import Counter
+class TextStats:
+    def __init__(self, text):
+        self.text = text
+    def count_words(self):
+        return len(self.text.split())
+    def most_common_letter(self):
+        letters = [ch.lower() for ch in self.text if ch.isalpha()]
+        if letters:
+            return Counter(letters).most_common(1)[0]
+        return None
+
+
+Завдання 1
+
+calendar = UkrainianCalendar()
+print("Свята:", calendar.get_holiday_list())
+today = datetime.date.today()
+print(f"Сьогодні {today}. Це робочий день?", calendar.is_working_day(today))
+
+Завдання 2
+calc = Calculator()
+a = float(input("Введіть перше число: "))
+b = float(input("Введіть друге число: "))
+operation = input("Оберіть операцію: ")
+
+if operation == "add":
+    print("Результат:", calc.add(a, b))
+elif operation == "subtract":
+    print("Результат:", calc.subtract(a, b))
+elif operation == "multiply":
+    print("Результат:", calc.multiply(a, b))
+elif operation == "divide":
+    print("Результат:", calc.divide(a, b))
+else:
+    print("шо це")
+
+Завдання 3
+text = input("Введіть текст: ")
+stats = TextStats(text)
+print("Кількість слів:", stats.count_words())
+most_common = stats.most_common_letter()
+if most_common:
+    print(f"Найчастіша літера: '{most_common[0]}' ")
+else:
+    print("Немає букв")
+
+
+
+
+
+
+
+
